@@ -225,7 +225,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="origenLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Base de Datos de Origen"/>
+                <Property name="text" type="java.lang.String" value="Base de Datos de MariaDB"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="instanciaLabel">
@@ -270,7 +270,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="destinoLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Base de Datos Destino"/>
+                <Property name="text" type="java.lang.String" value="Base de Datos SQL Server"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="instanciaLabel1">
@@ -409,7 +409,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="sinReplicarLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Sin Replicar"/>
+                <Property name="text" type="java.lang.String" value="MariaDB"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="sinReplicarScrollPane">
@@ -429,7 +429,7 @@
             </Container>
             <Component class="javax.swing.JLabel" name="replicandoLabel">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Replicando"/>
+                <Property name="text" type="java.lang.String" value="SQL Server"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="replicandoScrollPane">

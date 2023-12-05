@@ -74,7 +74,7 @@ public class Main extends javax.swing.JFrame {
 
         config_headerLabel.setText("Configuración de Bases de Datos");
 
-        origenLabel.setText("Base de Datos de Origen");
+        origenLabel.setText("Base de Datos de MariaDB");
 
         instanciaLabel.setText("Nombre Instancia");
 
@@ -88,7 +88,7 @@ public class Main extends javax.swing.JFrame {
 
         probar_OrigenButton.setText("Probar");
 
-        destinoLabel.setText("Base de Datos Destino");
+        destinoLabel.setText("Base de Datos SQL Server");
 
         instanciaLabel1.setText("Nombre Instancia");
 
@@ -235,13 +235,13 @@ public class Main extends javax.swing.JFrame {
 
         tablas_headerLabel.setText("Tablas BD Origen");
 
-        sinReplicarLabel.setText("Sin Replicar");
+        sinReplicarLabel.setText("MariaDB");
 
         sinReplicarTextArea.setColumns(20);
         sinReplicarTextArea.setRows(5);
         sinReplicarScrollPane.setViewportView(sinReplicarTextArea);
 
-        replicandoLabel.setText("Replicando");
+        replicandoLabel.setText("SQL Server");
 
         replicandoTextArea.setColumns(20);
         replicandoTextArea.setRows(5);
