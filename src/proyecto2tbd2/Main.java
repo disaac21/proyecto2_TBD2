@@ -42,7 +42,6 @@ public class Main extends javax.swing.JFrame {
         usernameLabel = new javax.swing.JLabel();
         usernameOrigen_tf = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
-        passwordOrigen_tf = new javax.swing.JTextField();
         probar_OrigenButton = new javax.swing.JButton();
         destinoLabel = new javax.swing.JLabel();
         instanciaLabel1 = new javax.swing.JLabel();
@@ -54,9 +53,10 @@ public class Main extends javax.swing.JFrame {
         usernameLabel1 = new javax.swing.JLabel();
         usernameDestino_tf = new javax.swing.JTextField();
         passwordLabel1 = new javax.swing.JLabel();
-        passwordDestino_tf = new javax.swing.JTextField();
         probar_DestinoButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordField2 = new javax.swing.JPasswordField();
         tabTablas = new javax.swing.JPanel();
         tablas_headerLabel = new javax.swing.JLabel();
         sinReplicarLabel = new javax.swing.JLabel();
@@ -104,6 +104,10 @@ public class Main extends javax.swing.JFrame {
 
         guardarButton.setText("Guardar");
 
+        jPasswordField1.setText("jPasswordField1");
+
+        jPasswordField2.setText("jPasswordField2");
+
         javax.swing.GroupLayout tabConfiguracionLayout = new javax.swing.GroupLayout(tabConfiguracion);
         tabConfiguracion.setLayout(tabConfiguracionLayout);
         tabConfiguracionLayout.setHorizontalGroup(
@@ -112,7 +116,7 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabConfiguracionLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(origenLabel)
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
                                 .addComponent(instanciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,7 +129,7 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
                                 .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(passwordOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPasswordField1))
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
                                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(puertoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,8 +138,8 @@ public class Main extends javax.swing.JFrame {
                                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(puertoOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(usernameOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                        .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                        .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(destinoLabel)
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
                                 .addComponent(instanciaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,7 +152,7 @@ public class Main extends javax.swing.JFrame {
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
                                 .addComponent(passwordLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(passwordDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jPasswordField2))
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
                                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(puertoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,8 +202,8 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(usernameOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)
                         .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(passwordOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordLabel)))
+                            .addComponent(passwordLabel)
+                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(tabConfiguracionLayout.createSequentialGroup()
                         .addComponent(destinoLabel)
                         .addGap(18, 18, 18)
@@ -220,8 +224,8 @@ public class Main extends javax.swing.JFrame {
                             .addComponent(usernameDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(9, 9, 9)
                         .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(passwordDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordLabel1))))
+                            .addComponent(passwordLabel1)
+                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(probar_OrigenButton)
@@ -366,12 +370,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel instanciaLabel;
     private javax.swing.JLabel instanciaLabel1;
     private javax.swing.JTextField instanciaOrigen_tf;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JLabel origenLabel;
-    private javax.swing.JTextField passwordDestino_tf;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel passwordLabel1;
-    private javax.swing.JTextField passwordOrigen_tf;
     private javax.swing.JButton probar_DestinoButton;
     private javax.swing.JButton probar_OrigenButton;
     private javax.swing.JTextField puertoDestino_tf;

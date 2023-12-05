@@ -61,7 +61,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="origenLabel" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Component id="instanciaLabel" min="-2" pref="120" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="passwordLabel" min="-2" pref="120" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="passwordOrigen_tf" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="jPasswordField1" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -90,8 +90,8 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="104" max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <EmptySpace pref="142" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="destinoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="instanciaLabel1" min="-2" pref="120" max="-2" attributes="0"/>
@@ -106,7 +106,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="passwordLabel1" min="-2" pref="120" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="passwordDestino_tf" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="jPasswordField2" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -172,8 +172,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="passwordOrigen_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="passwordLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPasswordField1" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
@@ -200,8 +200,8 @@
                               </Group>
                               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="passwordDestino_tf" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="passwordLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jPasswordField2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -261,8 +261,6 @@
                 <Property name="text" type="java.lang.String" value="Password"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="passwordOrigen_tf">
-            </Component>
             <Component class="javax.swing.JButton" name="probar_OrigenButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Probar"/>
@@ -306,8 +304,6 @@
                 <Property name="text" type="java.lang.String" value="Password"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="passwordDestino_tf">
-            </Component>
             <Component class="javax.swing.JButton" name="probar_DestinoButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Probar"/>
@@ -316,6 +312,16 @@
             <Component class="javax.swing.JButton" name="guardarButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JPasswordField" name="jPasswordField2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="jPasswordField2"/>
               </Properties>
             </Component>
           </SubComponents>
