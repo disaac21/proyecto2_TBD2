@@ -60,15 +60,15 @@ public class Main extends javax.swing.JFrame {
         tabTablas = new javax.swing.JPanel();
         tablas_headerLabel = new javax.swing.JLabel();
         sinReplicarLabel = new javax.swing.JLabel();
-        sinReplicarScrollPane = new javax.swing.JScrollPane();
-        sinReplicarTextArea = new javax.swing.JTextArea();
         replicandoLabel = new javax.swing.JLabel();
-        replicandoScrollPane = new javax.swing.JScrollPane();
-        replicandoTextArea = new javax.swing.JTextArea();
         toReplicando_button = new javax.swing.JButton();
         toSinReplicar_button = new javax.swing.JButton();
         guardarTablas_button = new javax.swing.JButton();
         cancelarTablas_button = new javax.swing.JButton();
+        MariaDB_scrollpane = new javax.swing.JScrollPane();
+        MariaDB_list = new javax.swing.JList<>();
+        SQLServer_scrollpane = new javax.swing.JScrollPane();
+        SQLServer_list = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -148,7 +148,7 @@ public class Main extends javax.swing.JFrame {
                                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(puertoOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(usernameOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(destinoLabel)
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
@@ -252,15 +252,7 @@ public class Main extends javax.swing.JFrame {
 
         sinReplicarLabel.setText("MariaDB");
 
-        sinReplicarTextArea.setColumns(20);
-        sinReplicarTextArea.setRows(5);
-        sinReplicarScrollPane.setViewportView(sinReplicarTextArea);
-
         replicandoLabel.setText("SQL Server");
-
-        replicandoTextArea.setColumns(20);
-        replicandoTextArea.setRows(5);
-        replicandoScrollPane.setViewportView(replicandoTextArea);
 
         toReplicando_button.setText(">>");
 
@@ -269,6 +261,10 @@ public class Main extends javax.swing.JFrame {
         guardarTablas_button.setText("Guardar");
 
         cancelarTablas_button.setText("Cancelar");
+
+        MariaDB_scrollpane.setViewportView(MariaDB_list);
+
+        SQLServer_scrollpane.setViewportView(SQLServer_list);
 
         javax.swing.GroupLayout tabTablasLayout = new javax.swing.GroupLayout(tabTablas);
         tabTablas.setLayout(tabTablasLayout);
@@ -281,26 +277,21 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(replicandoLabel)
                 .addGap(117, 117, 117))
             .addGroup(tabTablasLayout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(sinReplicarScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(tabTablasLayout.createSequentialGroup()
-                            .addGap(49, 49, 49)
-                            .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(guardarTablas_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cancelarTablas_button)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabTablasLayout.createSequentialGroup()
-                            .addGap(41, 41, 41)
-                            .addComponent(tablas_headerLabel)))
-                    .addGroup(tabTablasLayout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(toReplicando_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(toSinReplicar_button))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                .addComponent(replicandoScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39))
+                .addGap(27, 27, 27)
+                .addComponent(SQLServer_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47)
+                .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(guardarTablas_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toReplicando_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(toSinReplicar_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cancelarTablas_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(MariaDB_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29))
+            .addGroup(tabTablasLayout.createSequentialGroup()
+                .addGap(296, 296, 296)
+                .addComponent(tablas_headerLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         tabTablasLayout.setVerticalGroup(
             tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,19 +303,19 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(sinReplicarLabel)
                     .addComponent(replicandoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(MariaDB_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SQLServer_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(tabTablasLayout.createSequentialGroup()
+                        .addGap(56, 56, 56)
                         .addComponent(toReplicando_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(toSinReplicar_button)
-                        .addGap(134, 134, 134)
+                        .addGap(18, 18, 18)
                         .addComponent(guardarTablas_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelarTablas_button))
-                    .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(replicandoScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(sinReplicarScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addComponent(cancelarTablas_button)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         mainTabbedPane.addTab("Tablas", tabTablas);
@@ -380,6 +371,10 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> MariaDB_list;
+    private javax.swing.JScrollPane MariaDB_scrollpane;
+    private javax.swing.JList<String> SQLServer_list;
+    private javax.swing.JScrollPane SQLServer_scrollpane;
     private javax.swing.JTextField bddDestino_tf;
     private javax.swing.JLabel bddLabel;
     private javax.swing.JLabel bddLabel1;
@@ -406,11 +401,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel puertoLabel1;
     private javax.swing.JTextField puertoOrigen_tf;
     private javax.swing.JLabel replicandoLabel;
-    private javax.swing.JScrollPane replicandoScrollPane;
-    private javax.swing.JTextArea replicandoTextArea;
     private javax.swing.JLabel sinReplicarLabel;
-    private javax.swing.JScrollPane sinReplicarScrollPane;
-    private javax.swing.JTextArea sinReplicarTextArea;
     private javax.swing.JPanel tabConfiguracion;
     private javax.swing.JPanel tabTablas;
     private javax.swing.JLabel tablas_headerLabel;
