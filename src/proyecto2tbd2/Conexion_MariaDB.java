@@ -1,19 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package proyecto2tbd2;
 import java.sql.*;
-/**
- *
- * @author serli
- */
+
 public class Conexion_MariaDB {
     Connection conexion;
     //Datos MariaDb
     private String host = "mariadb-database.cgwlqlsfjpds.us-east-1.rds.amazonaws.com";
     private String port = "3306";
-    private String dbName = "mariadb-database";
+    private String dbName = "Proyecto_Teoria2";
     private String userName = "admin";
     private String userPass = "DanielySerlio";
     

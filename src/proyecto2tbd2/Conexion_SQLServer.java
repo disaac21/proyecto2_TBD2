@@ -15,12 +15,9 @@ public class Conexion_SQLServer {
             // Provide your SQL Server credentials
             String username = "danielserlio";
             String password = "danielserlio";
+            
             // Create a connection URL
             String url = "jdbc:sqlserver://dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com:1433;databaseName=dbproyecto2;user="+username +";password=" +password+";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
-
-//            String url = "jdbc:sqlserver://dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com:1433;databaseName=dbproyecto2";
-
-
 
             // Establish the connection
             connection = DriverManager.getConnection(url);
