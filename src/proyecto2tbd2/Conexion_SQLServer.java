@@ -7,42 +7,39 @@ import java.sql.SQLException;
 
 public class Conexion_SQLServer {
 
-    Connection conexion;
-
-    // Datos SQL Server
-    private String url = "jdbc:sqlserver://dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com:1433;databaseName=dbproyecto2";
-    private String username = "danielserlio";
-    private String password = "danielserlio";
-
-    public void Conexion_SQLServer() {
+    public void connect() {
+        Connection connection = null;
         try {
             // Register the JDBC driver
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+           
+            // Provide your SQL Server credentials
+            String username = "danielserlio";
+            String password = "danielserlio";
+            // Create a connection URL
+            String url = "jdbc:sqlserver://dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com:1433;databaseName=dbproyecto2;user="+username +";password=" +password+";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
+
+//            String url = "jdbc:sqlserver://dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com:1433;databaseName=dbproyecto2";
+
+
 
             // Establish the connection
-            conexion = DriverManager.getConnection(url, username, password);
+            connection = DriverManager.getConnection(url);
 
-            if (conexion != null) {
+            if (connection != null) {
                 System.out.println("Connected to SQL Server database!");
+                // Perform database operations here
+                // Example: execute queries, update data, etc.
             }
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch ( SQLException e) {
             e.printStackTrace();
         } finally {
             try {
-                if (conexion != null && !conexion.isClosed()) {
-                    conexion.close();
+                if (connection != null && !connection.isClosed()) {
+                    connection.close();
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-        }
-    }
-
-    public void desconectar() {
-        try {
-            conexion.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
 }

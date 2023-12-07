@@ -53,10 +53,10 @@ public class Main extends javax.swing.JFrame {
         usernameLabel1 = new javax.swing.JLabel();
         usernameDestino_tf = new javax.swing.JTextField();
         passwordLabel1 = new javax.swing.JLabel();
-        probar_DestinoButton = new javax.swing.JButton();
         guardarButton = new javax.swing.JButton();
         jPasswordField1 = new javax.swing.JPasswordField();
         jPasswordField2 = new javax.swing.JPasswordField();
+        jButton1 = new javax.swing.JButton();
         tabTablas = new javax.swing.JPanel();
         tablas_headerLabel = new javax.swing.JLabel();
         sinReplicarLabel = new javax.swing.JLabel();
@@ -87,6 +87,11 @@ public class Main extends javax.swing.JFrame {
         passwordLabel.setText("Password");
 
         probar_OrigenButton.setText("Probar");
+        probar_OrigenButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                probar_OrigenButtonMouseClicked(evt);
+            }
+        });
 
         destinoLabel.setText("Base de Datos SQL Server");
 
@@ -100,13 +105,18 @@ public class Main extends javax.swing.JFrame {
 
         passwordLabel1.setText("Password");
 
-        probar_DestinoButton.setText("Probar");
-
         guardarButton.setText("Guardar");
 
         jPasswordField1.setText("jPasswordField1");
 
         jPasswordField2.setText("jPasswordField2");
+
+        jButton1.setText("Probar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout tabConfiguracionLayout = new javax.swing.GroupLayout(tabConfiguracion);
         tabConfiguracion.setLayout(tabConfiguracionLayout);
@@ -138,7 +148,7 @@ public class Main extends javax.swing.JFrame {
                                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(puertoOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(usernameOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
                         .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(destinoLabel)
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
@@ -160,20 +170,21 @@ public class Main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(puertoDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernameDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(probar_DestinoButton)))
+                                    .addComponent(usernameDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(tabConfiguracionLayout.createSequentialGroup()
                         .addGap(249, 249, 249)
                         .addComponent(config_headerLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(probar_OrigenButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabConfiguracionLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(guardarButton))
+            .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(probar_OrigenButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(217, 217, 217))
         );
         tabConfiguracionLayout.setVerticalGroup(
             tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,7 +240,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(probar_OrigenButton)
-                    .addComponent(probar_DestinoButton))
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(guardarButton)
                 .addContainerGap())
@@ -338,6 +349,18 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        Conexion_SQLServer prueba = new Conexion_SQLServer();
+        prueba.connect();
+        System.out.println("done");
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void probar_OrigenButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_probar_OrigenButtonMouseClicked
+        Conexion_MariaDB prueba = new Conexion_MariaDB();
+        prueba.Conexion_MariaDB();
+        System.out.println("done maria");
+    }//GEN-LAST:event_probar_OrigenButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -351,8 +374,6 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Conexion_SQLServer prueba = new Conexion_SQLServer();
-                prueba.Conexion_SQLServer();
                 new Main().setVisible(true);
             }
         });
@@ -372,13 +393,13 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel instanciaLabel;
     private javax.swing.JLabel instanciaLabel1;
     private javax.swing.JTextField instanciaOrigen_tf;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTabbedPane mainTabbedPane;
     private javax.swing.JLabel origenLabel;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel passwordLabel1;
-    private javax.swing.JButton probar_DestinoButton;
     private javax.swing.JButton probar_OrigenButton;
     private javax.swing.JTextField puertoDestino_tf;
     private javax.swing.JLabel puertoLabel;

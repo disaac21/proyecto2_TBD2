@@ -17,7 +17,7 @@ public class Conexion_MariaDB {
     private String userName = "admin";
     private String userPass = "DanielySerlio";
     
-    public Conexion_MariaDB(){
+    public void Conexion_MariaDB(){
         try{
             //Conexion para MariaDB
              
