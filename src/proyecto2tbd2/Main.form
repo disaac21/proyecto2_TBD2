@@ -137,7 +137,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="probar_OrigenButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="probar_DestinoButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -209,7 +209,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="probar_OrigenButton" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="probar_DestinoButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="46" max="32767" attributes="0"/>
                       <Component id="guardarButton" min="-2" max="-2" attributes="0"/>
@@ -323,12 +323,12 @@
                 <Property name="text" type="java.lang.String" value="jPasswordField2"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="probar_DestinoButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Probar"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="probar_DestinoButtonMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
