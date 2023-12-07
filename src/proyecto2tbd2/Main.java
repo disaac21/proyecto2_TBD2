@@ -78,11 +78,20 @@ public class Main extends javax.swing.JFrame {
 
         instanciaLabel.setText("Nombre Instancia");
 
+        instanciaOrigen_tf.setText("MariaDB");
+        instanciaOrigen_tf.setToolTipText("");
+
         bddLabel.setText("Nombre Base Datos");
+
+        bddOrigen_tf.setText("Proyecto_Teoria2");
 
         puertoLabel.setText("Puerto");
 
+        puertoOrigen_tf.setText("3306");
+
         usernameLabel.setText("Nombre Usuario");
+
+        usernameOrigen_tf.setText("admin");
 
         passwordLabel.setText("Password");
 
@@ -97,19 +106,32 @@ public class Main extends javax.swing.JFrame {
 
         instanciaLabel1.setText("Nombre Instancia");
 
+        instanciaDestino_tf.setText("SQLServer");
+
         bddLabel1.setText("Nombre Base Datos");
+
+        bddDestino_tf.setText("dbproyecto2");
+        bddDestino_tf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bddDestino_tfActionPerformed(evt);
+            }
+        });
 
         puertoLabel1.setText("Puerto");
 
+        puertoDestino_tf.setText("1433");
+
         usernameLabel1.setText("Nombre Usuario");
+
+        usernameDestino_tf.setText("danielserlio");
 
         passwordLabel1.setText("Password");
 
         guardarButton.setText("Guardar");
 
-        jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.setText("DanielySerlio");
 
-        jPasswordField2.setText("jPasswordField2");
+        jPasswordField2.setText("danielserlio");
 
         probar_DestinoButton.setText("Probar");
         probar_DestinoButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -351,6 +373,10 @@ public class Main extends javax.swing.JFrame {
         prueba.Conexion_MariaDB();
         System.out.println("done maria");
     }//GEN-LAST:event_probar_OrigenButtonMouseClicked
+
+    private void bddDestino_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bddDestino_tfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bddDestino_tfActionPerformed
 
     /**
      * @param args the command line arguments

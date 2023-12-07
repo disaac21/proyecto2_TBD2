@@ -235,6 +235,10 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="instanciaOrigen_tf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="MariaDB"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="bddLabel">
               <Properties>
@@ -242,6 +246,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="bddOrigen_tf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Proyecto_Teoria2"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="puertoLabel">
               <Properties>
@@ -249,6 +256,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="puertoOrigen_tf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="3306"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="usernameLabel">
               <Properties>
@@ -256,6 +266,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="usernameOrigen_tf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="admin"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="passwordLabel">
               <Properties>
@@ -281,6 +294,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="instanciaDestino_tf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="SQLServer"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="bddLabel1">
               <Properties>
@@ -288,6 +304,12 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="bddDestino_tf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="dbproyecto2"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bddDestino_tfActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="puertoLabel1">
               <Properties>
@@ -295,6 +317,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="puertoDestino_tf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="1433"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="usernameLabel1">
               <Properties>
@@ -302,6 +327,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="usernameDestino_tf">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="danielserlio"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="passwordLabel1">
               <Properties>
@@ -315,12 +343,12 @@
             </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordField1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+                <Property name="text" type="java.lang.String" value="DanielySerlio"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JPasswordField" name="jPasswordField2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jPasswordField2"/>
+                <Property name="text" type="java.lang.String" value="danielserlio"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="probar_DestinoButton">
