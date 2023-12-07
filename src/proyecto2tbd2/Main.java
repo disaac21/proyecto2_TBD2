@@ -351,6 +351,8 @@ public class Main extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                Conexion_SQLServer prueba = new Conexion_SQLServer();
+                prueba.Conexion_SQLServer();
                 new Main().setVisible(true);
             }
         });
