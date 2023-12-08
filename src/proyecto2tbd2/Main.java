@@ -25,9 +25,9 @@ public class Main extends javax.swing.JFrame {
     private String mariaDBUser = "admin";
     private String mariaDBPassword = "DanielySerlio";
 
-    private String sqlServerUrl = "dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com";
     private String sqlServerUser = "danielserlio";
     private String sqlServerPassword = "danielserlio";
+    private String sqlServerUrl = "jdbc:sqlserver://dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com:1433;databaseName=dbproyecto2;user=" + sqlServerUser + ";password=" + sqlServerPassword + ";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
 
     /**
      * Creates new form Main
@@ -81,9 +81,9 @@ public class Main extends javax.swing.JFrame {
         guardarTablas_button = new javax.swing.JButton();
         cancelarTablas_button = new javax.swing.JButton();
         MariaDB_scrollpane = new javax.swing.JScrollPane();
-        MariaDB_list = new javax.swing.JList<>();
-        SQLServer_scrollpane = new javax.swing.JScrollPane();
         SQLServer_list = new javax.swing.JList<>();
+        SQLServer_scrollpane = new javax.swing.JScrollPane();
+        MariaDB_list = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -303,9 +303,9 @@ public class Main extends javax.swing.JFrame {
 
         cancelarTablas_button.setText("Cancelar");
 
-        MariaDB_scrollpane.setViewportView(MariaDB_list);
+        MariaDB_scrollpane.setViewportView(SQLServer_list);
 
-        SQLServer_scrollpane.setViewportView(SQLServer_list);
+        SQLServer_scrollpane.setViewportView(MariaDB_list);
 
         javax.swing.GroupLayout tabTablasLayout = new javax.swing.GroupLayout(tabTablas);
         tabTablas.setLayout(tabTablasLayout);
@@ -396,33 +396,47 @@ public class Main extends javax.swing.JFrame {
 
     private void mainTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mainTabbedPaneStateChanged
 
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-
+        //Actualizar JList de TABLES de MariaDB
+        DefaultListModel<String> MariaListModel = new DefaultListModel<>();
         try {
-
             Connection connection = DriverManager.getConnection(mariaDBUrl, mariaDBUser, mariaDBPassword);
-
             String sql = "SHOW TABLES FROM Proyecto_Teoria2";
-
             // Create a statement
             Statement statement = connection.createStatement();
-
             // Execute the query
             ResultSet resultSet = statement.executeQuery(sql);
-
             while (resultSet.next()) {
                 String tableName = resultSet.getString(1);
-                listModel.addElement(tableName);
+                MariaListModel.addElement(tableName);
             }
-            SQLServer_list.setModel(listModel);
-
+            MariaDB_list.setModel(MariaListModel);
             resultSet.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
 
+        //Actualizar JList de TABLES de SQL Server
+        DefaultListModel<String> ServerListModel = new DefaultListModel<>();
+        try {
+            Connection connection = DriverManager.getConnection(sqlServerUrl);
+            String sql = "SELECT TABLE_NAME\n"
+                    + "FROM INFORMATION_SCHEMA.TABLES\n"
+                    + "WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_CATALOG = 'dbproyecto2';";
+            // Create a statement
+            Statement statement = connection.createStatement();
+            // Execute the query
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()) {
+                String tableName = resultSet.getString(1);
+                ServerListModel.addElement(tableName);
+            }
+            SQLServer_list.setModel(ServerListModel);
+            resultSet.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }//GEN-LAST:event_mainTabbedPaneStateChanged
 
