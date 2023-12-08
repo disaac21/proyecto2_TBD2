@@ -20,7 +20,7 @@ public class MariaDBToSQLServerExporter {
 
     public MariaDBToSQLServerExporter() {
     }
-    
+
     public MariaDBToSQLServerExporter(String mariaDBUrl, String mariaDBUser, String mariaDBPassword,
             String sqlServerUrl, String sqlServerUser, String sqlServerPassword) {
         this.mariaDBUrl = mariaDBUrl;
@@ -80,18 +80,28 @@ public class MariaDBToSQLServerExporter {
             // Insert data into SQL Server
             ResultSetMetaData metaData = resultSet.getMetaData();
 
+            // Elminando la tabla
+            String query = "IF OBJECT_ID('" + tableName + "', 'U') IS NOT NULL BEGIN EXEC('DROP TABLE " + tableName + ";') END;";
+
             // Create SQL Server table dynamically based on MariaDB table structure
             StringBuilder createTableQuery = new StringBuilder("CREATE TABLE " + tableName + " (");
             for (int i = 1; i <= metaData.getColumnCount(); i++) {
-                createTableQuery.append(metaData.getColumnName(i))
-                        .append(" ")
-                        .append(metaData.getColumnTypeName(i))
-                        .append(", ");
+                createTableQuery.append(metaData.getColumnName(i));
+                createTableQuery.append(" ");
+                if (metaData.getColumnTypeName(i) == "VARCHAR") {
+                    createTableQuery.append(metaData.getColumnTypeName(i))
+                            .append("(" + metaData.getPrecision(i) + ") ");
+                }else{
+                    createTableQuery.append(metaData.getColumnTypeName(i));
+                }
+                createTableQuery.append(", ");
             }
             createTableQuery.delete(createTableQuery.length() - 2, createTableQuery.length());  // Remove trailing comma and space
             createTableQuery.append(")");
 
             System.out.println(createTableQuery);
+            sqlServerStatement.execute(query);
+            System.out.println("se elimino la tabla " + tableName);
             sqlServerStatement.executeUpdate(createTableQuery.toString());
 
             // Insert data into SQL Server table
@@ -102,7 +112,7 @@ public class MariaDBToSQLServerExporter {
                 }
                 insertQuery.delete(insertQuery.length() - 2, insertQuery.length());  // Remove trailing comma and space
                 insertQuery.append(")");
-                
+
                 System.out.println(insertQuery);
 
                 sqlServerStatement.executeUpdate(insertQuery.toString());

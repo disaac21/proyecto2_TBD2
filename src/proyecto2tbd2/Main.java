@@ -303,6 +303,11 @@ public class Main extends javax.swing.JFrame {
                 toReplicando_buttonMouseClicked(evt);
             }
         });
+        toReplicando_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toReplicando_buttonActionPerformed(evt);
+            }
+        });
 
         guardarTablas_button.setText("Guardar");
 
@@ -449,6 +454,10 @@ public class Main extends javax.swing.JFrame {
         MariaDBToSQLServerExporter exportar = new MariaDBToSQLServerExporter();
         exportar.exportMariaDBToSQLServer(MariaDB_list);
     }//GEN-LAST:event_toReplicando_buttonMouseClicked
+
+    private void toReplicando_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toReplicando_buttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toReplicando_buttonActionPerformed
 
     /**
      * @param args the command line arguments
