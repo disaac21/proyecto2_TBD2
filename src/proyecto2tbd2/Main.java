@@ -298,6 +298,11 @@ public class Main extends javax.swing.JFrame {
         replicandoLabel.setText("SQL Server");
 
         toReplicando_button.setText(">>");
+        toReplicando_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                toReplicando_buttonMouseClicked(evt);
+            }
+        });
 
         guardarTablas_button.setText("Guardar");
 
@@ -439,6 +444,11 @@ public class Main extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_mainTabbedPaneStateChanged
+
+    private void toReplicando_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toReplicando_buttonMouseClicked
+        MariaDBToSQLServerExporter exportar = new MariaDBToSQLServerExporter();
+        exportar.exportMariaDBToSQLServer(MariaDB_list);
+    }//GEN-LAST:event_toReplicando_buttonMouseClicked
 
     /**
      * @param args the command line arguments
