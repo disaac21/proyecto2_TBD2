@@ -5,6 +5,14 @@
 package proyecto2tbd2;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.UIManager;
 
 /**
@@ -12,6 +20,14 @@ import javax.swing.UIManager;
  * @author serli
  */
 public class Main extends javax.swing.JFrame {
+
+    private String mariaDBUrl = "jdbc:mariadb://mariadb-database.cgwlqlsfjpds.us-east-1.rds.amazonaws.com:3306/Proyecto_Teoria2";
+    private String mariaDBUser = "admin";
+    private String mariaDBPassword = "DanielySerlio";
+
+    private String sqlServerUrl = "dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com";
+    private String sqlServerUser = "danielserlio";
+    private String sqlServerPassword = "danielserlio";
 
     /**
      * Creates new form Main
@@ -62,7 +78,6 @@ public class Main extends javax.swing.JFrame {
         sinReplicarLabel = new javax.swing.JLabel();
         replicandoLabel = new javax.swing.JLabel();
         toReplicando_button = new javax.swing.JButton();
-        toSinReplicar_button = new javax.swing.JButton();
         guardarTablas_button = new javax.swing.JButton();
         cancelarTablas_button = new javax.swing.JButton();
         MariaDB_scrollpane = new javax.swing.JScrollPane();
@@ -71,6 +86,12 @@ public class Main extends javax.swing.JFrame {
         SQLServer_list = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        mainTabbedPane.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                mainTabbedPaneStateChanged(evt);
+            }
+        });
 
         config_headerLabel.setText("Configuración de Bases de Datos");
 
@@ -278,8 +299,6 @@ public class Main extends javax.swing.JFrame {
 
         toReplicando_button.setText(">>");
 
-        toSinReplicar_button.setText("<<");
-
         guardarTablas_button.setText("Guardar");
 
         cancelarTablas_button.setText("Cancelar");
@@ -301,12 +320,11 @@ public class Main extends javax.swing.JFrame {
             .addGroup(tabTablasLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(SQLServer_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(38, 38, 38)
                 .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(guardarTablas_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(toReplicando_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(toSinReplicar_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cancelarTablas_button, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(cancelarTablas_button, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(MariaDB_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
@@ -331,9 +349,7 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(tabTablasLayout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addComponent(toReplicando_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(toSinReplicar_button)
-                        .addGap(18, 18, 18)
+                        .addGap(53, 53, 53)
                         .addComponent(guardarTablas_button)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cancelarTablas_button)))
@@ -377,6 +393,38 @@ public class Main extends javax.swing.JFrame {
     private void bddDestino_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bddDestino_tfActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bddDestino_tfActionPerformed
+
+    private void mainTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mainTabbedPaneStateChanged
+
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+
+        try {
+
+            Connection connection = DriverManager.getConnection(mariaDBUrl, mariaDBUser, mariaDBPassword);
+
+            String sql = "SHOW TABLES FROM Proyecto_Teoria2";
+
+            // Create a statement
+            Statement statement = connection.createStatement();
+
+            // Execute the query
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                String tableName = resultSet.getString(1);
+                listModel.addElement(tableName);
+            }
+            SQLServer_list.setModel(listModel);
+
+            resultSet.close();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+
+    }//GEN-LAST:event_mainTabbedPaneStateChanged
 
     /**
      * @param args the command line arguments
@@ -432,7 +480,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel tabTablas;
     private javax.swing.JLabel tablas_headerLabel;
     private javax.swing.JButton toReplicando_button;
-    private javax.swing.JButton toSinReplicar_button;
     private javax.swing.JTextField usernameDestino_tf;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JLabel usernameLabel1;

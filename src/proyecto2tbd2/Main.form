@@ -42,6 +42,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JTabbedPane" name="mainTabbedPane">
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="mainTabbedPaneStateChanged"/>
+      </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
@@ -383,12 +386,11 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="SQLServer_scrollpane" min="-2" pref="231" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="guardarTablas_button" alignment="0" max="32767" attributes="0"/>
                           <Component id="toReplicando_button" alignment="0" max="32767" attributes="0"/>
-                          <Component id="toSinReplicar_button" alignment="0" max="32767" attributes="0"/>
-                          <Component id="cancelarTablas_button" pref="0" max="32767" attributes="0"/>
+                          <Component id="cancelarTablas_button" alignment="1" pref="81" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="51" max="32767" attributes="0"/>
                       <Component id="MariaDB_scrollpane" min="-2" pref="231" max="-2" attributes="0"/>
@@ -418,9 +420,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                               <Component id="toReplicando_button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="toSinReplicar_button" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                               <Component id="guardarTablas_button" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="cancelarTablas_button" min="-2" max="-2" attributes="0"/>
@@ -450,11 +450,6 @@
             <Component class="javax.swing.JButton" name="toReplicando_button">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="toSinReplicar_button">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="guardarTablas_button">
