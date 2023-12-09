@@ -65,6 +65,87 @@ public class MariaDBToSQLServerExporter {
         }
     }
 
+    public static String generateInsertTriggerQuery(ResultSetMetaData metaData, String tableName) throws SQLException {
+        StringBuilder triggerQuery = new StringBuilder();
+        triggerQuery.append("CREATE TRIGGER tr_").append(tableName).append("_AfterInsert\n");
+        triggerQuery.append("ON ").append(tableName).append("\n");
+        triggerQuery.append("AFTER INSERT\n");
+        triggerQuery.append("AS\n");
+        triggerQuery.append("BEGIN\n");
+        triggerQuery.append("    INSERT INTO Bitacora (Tabla, Accion, Hora, Consulta)\n");
+        triggerQuery.append("    SELECT '").append(tableName).append("', 'INSERT', GETDATE(), 'INSERT INTO ").append(tableName).append(" VALUES (' +\n");
+
+        int columnCount = metaData.getColumnCount();
+
+        for (int i = 1; i <= columnCount; i++) {
+            String columnName = metaData.getColumnName(i);
+            triggerQuery.append("           COALESCE(CONVERT(NVARCHAR(MAX), ").append(columnName).append("), '')");
+            if (i < columnCount) {
+                triggerQuery.append(" + ', ' + ");
+            }
+        }
+
+        triggerQuery.append(" + ')'\n");
+        triggerQuery.append("    FROM INSERTED;\n");
+        triggerQuery.append("END;\n");
+
+        return triggerQuery.toString();
+    }
+
+    public static String generateUpdateTriggerQuery(ResultSetMetaData metaData, String tableName) throws SQLException {
+        StringBuilder triggerQuery = new StringBuilder();
+        triggerQuery.append("CREATE TRIGGER tr_").append(tableName).append("_AfterUpdate\n");
+        triggerQuery.append("ON ").append(tableName).append("\n");
+        triggerQuery.append("AFTER UPDATE\n");
+        triggerQuery.append("AS\n");
+        triggerQuery.append("BEGIN\n");
+        triggerQuery.append("    INSERT INTO Bitacora (Tabla, Accion, Hora, Consulta)\n");
+        triggerQuery.append("    SELECT '").append(tableName).append("', 'UPDATE', GETDATE(), \n");
+        triggerQuery.append("           'UPDATE ").append(tableName).append(" SET ' +\n");
+
+        int columnCount = metaData.getColumnCount();
+
+        for (int i = 2; i <= columnCount; i++) {
+            String columnName = metaData.getColumnName(i);
+            triggerQuery.append("           COALESCE(\'").append(columnName).append(" = ''' + CONVERT(NVARCHAR(MAX), i.").append(columnName).append(") + ''', ', '')");
+            if (i < columnCount) {
+                triggerQuery.append(" + ', ' + ");
+            }
+        }
+
+        triggerQuery.append(" +\n");
+        triggerQuery.append("           'WHERE " + metaData.getColumnName(1) + " = ' + CONVERT(NVARCHAR(MAX), i." + metaData.getColumnName(1) + ")\n");
+        triggerQuery.append("    FROM INSERTED i\n");
+        triggerQuery.append("    INNER JOIN DELETED d ON i." + metaData.getColumnName(1) + " = d." + metaData.getColumnName(1) + "\n");
+
+//        // Add conditions for other columns
+//        for (int i = 1; i <= columnCount; i++) {
+//            String columnName = metaData.getColumnName(i);
+//            triggerQuery.append("        AND i2.").append(columnName).append(" = d.").append(columnName).append("\n");
+//        }
+//        triggerQuery.append("    );\n");
+        triggerQuery.append("END;\n");
+
+        return triggerQuery.toString();
+    }
+
+    public static String generateDeleteTriggerQuery(ResultSetMetaData metaData, String tableName) throws SQLException {
+        StringBuilder triggerQuery = new StringBuilder();
+        triggerQuery.append("CREATE TRIGGER tr_").append(tableName).append("_AfterDelete\n");
+        triggerQuery.append("ON ").append(tableName).append("\n");
+        triggerQuery.append("AFTER DELETE\n");
+        triggerQuery.append("AS\n");
+        triggerQuery.append("BEGIN\n");
+        triggerQuery.append("    INSERT INTO Bitacora (Tabla, Accion, Hora, Consulta)\n");
+        triggerQuery.append("    SELECT '").append(tableName).append("', 'DELETE', GETDATE(),\n");
+        triggerQuery.append("           'DELETE FROM ").append(tableName).append(" WHERE ").append(metaData.getColumnName(1)).append(" IN (' +\n");
+        triggerQuery.append("           COALESCE(CONVERT(NVARCHAR(MAX), ").append(metaData.getColumnName(1)).append("), '') + ')'\n");
+        triggerQuery.append("    FROM DELETED;\n");
+        triggerQuery.append("END;\n");
+
+        return triggerQuery.toString();
+    }
+
     private void exportData(JList MariaDB_list, Connection mariaDBConnection, Connection sqlServerConnection) throws SQLException {
         // Retrieve data from MariaDB
         Statement mariaDBStatement = mariaDBConnection.createStatement();
@@ -91,7 +172,7 @@ public class MariaDBToSQLServerExporter {
                 if (metaData.getColumnTypeName(i) == "VARCHAR") {
                     createTableQuery.append(metaData.getColumnTypeName(i))
                             .append("(" + metaData.getPrecision(i) + ") ");
-                }else{
+                } else {
                     createTableQuery.append(metaData.getColumnTypeName(i));
                 }
                 createTableQuery.append(", ");
@@ -103,6 +184,24 @@ public class MariaDBToSQLServerExporter {
             sqlServerStatement.execute(query);
             System.out.println("se elimino la tabla " + tableName);
             sqlServerStatement.executeUpdate(createTableQuery.toString());
+
+            // Aca tengo que crear los triggers
+            System.out.println("---- Instert TRIGGER ----");
+            String trigger = generateInsertTriggerQuery(metaData, tableName);
+            System.out.println(trigger);
+            sqlServerStatement.execute(trigger);
+
+            // Update trigger
+            System.out.println("---- update TRIGGER ----");
+            String updatetrigger = generateUpdateTriggerQuery(metaData, tableName);
+            System.out.println(updatetrigger);
+            sqlServerStatement.execute(updatetrigger);
+
+            //delete trigger
+            System.out.println(" --- delete trigger --- ");
+            String deletetrigger = generateDeleteTriggerQuery(metaData, tableName);
+            System.out.println(deletetrigger);
+            sqlServerStatement.execute(deletetrigger);
 
             // Insert data into SQL Server table
             while (resultSet.next()) {
