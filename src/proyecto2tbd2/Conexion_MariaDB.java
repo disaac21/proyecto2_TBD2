@@ -5,11 +5,11 @@ import java.sql.*;
 public class Conexion_MariaDB {
     Connection conexion;
     //Datos MariaDb
-    private String host = "mariadb-database.cgwlqlsfjpds.us-east-1.rds.amazonaws.com";
+    private String host = "127.0.0.1";
     private String port = "3306";
-    private String dbName = "Proyecto_Teoria2";
-    private String userName = "admin";
-    private String userPass = "DanielySerlio";
+    private String dbName = "proyecto_teoria2";
+    private String userName = "root";
+    private String userPass = "root";
     
     public void Conexion_MariaDB(){
         try{

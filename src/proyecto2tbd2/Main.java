@@ -21,9 +21,9 @@ import javax.swing.UIManager;
  */
 public class Main extends javax.swing.JFrame {
 
-    private String mariaDBUrl = "jdbc:mariadb://mariadb-database.cgwlqlsfjpds.us-east-1.rds.amazonaws.com:3306/Proyecto_Teoria2";
-    private String mariaDBUser = "admin";
-    private String mariaDBPassword = "DanielySerlio";
+    private String mariaDBUrl = "jdbc:mariadb://127.0.0.1:3306/proyecto_teoria2";
+    private String mariaDBUser = "root";
+    private String mariaDBPassword = "root";
 
     private String sqlServerUser = "danielserlio";
     private String sqlServerPassword = "danielserlio";
@@ -99,12 +99,12 @@ public class Main extends javax.swing.JFrame {
 
         instanciaLabel.setText("Nombre Instancia");
 
-        instanciaOrigen_tf.setText("MariaDB");
+        instanciaOrigen_tf.setText("LocalMariaDB");
         instanciaOrigen_tf.setToolTipText("");
 
         bddLabel.setText("Nombre Base Datos");
 
-        bddOrigen_tf.setText("Proyecto_Teoria2");
+        bddOrigen_tf.setText("proyecto_teoria2");
 
         puertoLabel.setText("Puerto");
 
@@ -112,7 +112,7 @@ public class Main extends javax.swing.JFrame {
 
         usernameLabel.setText("Nombre Usuario");
 
-        usernameOrigen_tf.setText("admin");
+        usernameOrigen_tf.setText("root");
 
         passwordLabel.setText("Password");
 
@@ -150,7 +150,7 @@ public class Main extends javax.swing.JFrame {
 
         guardarButton.setText("Guardar");
 
-        passwordOrigen_tf.setText("DanielySerlio");
+        passwordOrigen_tf.setText("root");
 
         passwordDestino_tf.setText("danielserlio");
 

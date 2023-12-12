@@ -10,9 +10,9 @@ import javax.swing.JList;
 
 public class MariaDBToSQLServerExporter {
 
-    private String mariaDBUrl = "jdbc:mariadb://mariadb-database.cgwlqlsfjpds.us-east-1.rds.amazonaws.com:3306/Proyecto_Teoria2";
-    private String mariaDBUser = "admin";
-    private String mariaDBPassword = "DanielySerlio";
+    private String mariaDBUrl = "jdbc:mariadb://127.0.0.1:3306/proyecto_teoria2";
+    private String mariaDBUser = "root";
+    private String mariaDBPassword = "root";
 
     private String sqlServerUser = "danielserlio";
     private String sqlServerPassword = "danielserlio";
