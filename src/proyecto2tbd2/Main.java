@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.UIManager;
@@ -21,14 +22,16 @@ import javax.swing.UIManager;
  */
 public class Main extends javax.swing.JFrame {
 
-    private String mariaDBUrl = "jdbc:mariadb://127.0.0.1:3306/proyecto_teoria2";
-    private String mariaDBUser = "root";
-    private String mariaDBPassword = "root";
+    private String MariaDBIP = "127.0.0.1";
+    private String SQLServerAWS = "dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com";
 
-    private String sqlServerUser = "danielserlio";
-    private String sqlServerPassword = "danielserlio";
-    private String sqlServerUrl = "jdbc:sqlserver://dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com:1433;databaseName=dbproyecto2;user=" + sqlServerUser + ";password=" + sqlServerPassword + ";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
-
+//    private String mariaDBUrl = "jdbc:mariadb://127.0.0.1:3306/proyecto_teoria2";
+//    private String mariaDBUser = "root";
+//    private String mariaDBPassword = "root";
+//
+//    private String sqlServerUser = "danielserlio";
+//    private String sqlServerPassword = "danielserlio";
+//    private String sqlServerUrl = "jdbc:sqlserver://dbproyecto2.cqb9pqutso6u.us-east-1.rds.amazonaws.com:1433;databaseName=dbproyecto2;user=" + sqlServerUser + ";password=" + sqlServerPassword + ";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
     /**
      * Creates new form Main
      */
@@ -58,7 +61,9 @@ public class Main extends javax.swing.JFrame {
         usernameLabel = new javax.swing.JLabel();
         usernameOrigen_tf = new javax.swing.JTextField();
         passwordLabel = new javax.swing.JLabel();
+        passwordOrigen_tf = new javax.swing.JPasswordField();
         probar_OrigenButton = new javax.swing.JButton();
+        probar_OrigenLabel = new javax.swing.JLabel();
         destinoLabel = new javax.swing.JLabel();
         instanciaLabel1 = new javax.swing.JLabel();
         instanciaDestino_tf = new javax.swing.JTextField();
@@ -69,10 +74,10 @@ public class Main extends javax.swing.JFrame {
         usernameLabel1 = new javax.swing.JLabel();
         usernameDestino_tf = new javax.swing.JTextField();
         passwordLabel1 = new javax.swing.JLabel();
-        guardarButton = new javax.swing.JButton();
-        passwordOrigen_tf = new javax.swing.JPasswordField();
         passwordDestino_tf = new javax.swing.JPasswordField();
+        guardarButton = new javax.swing.JButton();
         probar_DestinoButton = new javax.swing.JButton();
+        probar_DestinoLabel = new javax.swing.JLabel();
         tabTablas = new javax.swing.JPanel();
         tablas_headerLabel = new javax.swing.JLabel();
         sinReplicarLabel = new javax.swing.JLabel();
@@ -84,6 +89,9 @@ public class Main extends javax.swing.JFrame {
         SQLServer_list = new javax.swing.JList<>();
         SQLServer_scrollpane = new javax.swing.JScrollPane();
         MariaDB_list = new javax.swing.JList<>();
+        MariaDB_scrollpane1 = new javax.swing.JScrollPane();
+        PrelimSQLServer = new javax.swing.JList<>();
+        RefreshTables_Button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,6 +123,8 @@ public class Main extends javax.swing.JFrame {
         usernameOrigen_tf.setText("root");
 
         passwordLabel.setText("Password");
+
+        passwordOrigen_tf.setText("root");
 
         probar_OrigenButton.setText("Probar");
         probar_OrigenButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,11 +158,9 @@ public class Main extends javax.swing.JFrame {
 
         passwordLabel1.setText("Password");
 
-        guardarButton.setText("Guardar");
-
-        passwordOrigen_tf.setText("root");
-
         passwordDestino_tf.setText("danielserlio");
+
+        guardarButton.setText("Guardar");
 
         probar_DestinoButton.setText("Probar");
         probar_DestinoButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -166,75 +174,80 @@ public class Main extends javax.swing.JFrame {
         tabConfiguracionLayout.setHorizontalGroup(
             tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(origenLabel)
+                        .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                                .addComponent(instanciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(instanciaOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(probar_OrigenButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(probar_OrigenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(origenLabel)
+                                .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                                    .addComponent(instanciaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(instanciaOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                                    .addComponent(bddLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(bddOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                                    .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(passwordOrigen_tf))
+                                .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                                    .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(puertoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(puertoOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(usernameOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(107, 107, 107)
+                        .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                                .addComponent(bddLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bddOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                                .addComponent(passwordLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(passwordOrigen_tf))
-                            .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                                .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(puertoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(puertoOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernameOrigen_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
-                        .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(destinoLabel)
-                            .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                                .addComponent(instanciaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(instanciaDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                                .addComponent(bddLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bddDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                                .addComponent(passwordLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(passwordDestino_tf))
-                            .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                                .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(puertoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(puertoDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(usernameDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                        .addGap(249, 249, 249)
-                        .addComponent(config_headerLabel)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabConfiguracionLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(guardarButton))
+                                .addComponent(probar_DestinoButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(probar_DestinoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(destinoLabel)
+                                .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                                    .addComponent(instanciaLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(instanciaDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                                    .addComponent(bddLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(bddDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                                    .addComponent(passwordLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(passwordDestino_tf))
+                                .addGroup(tabConfiguracionLayout.createSequentialGroup()
+                                    .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(puertoLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(usernameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(puertoDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(usernameDestino_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(17, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tabConfiguracionLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(guardarButton)
+                        .addContainerGap())))
             .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(probar_OrigenButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(probar_DestinoButton)
-                .addGap(217, 217, 217))
+                .addGap(264, 264, 264)
+                .addComponent(config_headerLabel)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         tabConfiguracionLayout.setVerticalGroup(
             tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabConfiguracionLayout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addContainerGap()
                 .addComponent(config_headerLabel)
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(tabConfiguracionLayout.createSequentialGroup()
                         .addComponent(origenLabel)
@@ -283,8 +296,10 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(tabConfiguracionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(probar_OrigenButton)
-                    .addComponent(probar_DestinoButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                    .addComponent(probar_DestinoButton)
+                    .addComponent(probar_OrigenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(probar_DestinoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(guardarButton)
                 .addContainerGap())
         );
@@ -310,60 +325,88 @@ public class Main extends javax.swing.JFrame {
         });
 
         guardarTablas_button.setText("Guardar");
+        guardarTablas_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guardarTablas_buttonMouseClicked(evt);
+            }
+        });
 
         cancelarTablas_button.setText("Cancelar");
+        cancelarTablas_button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cancelarTablas_buttonMouseClicked(evt);
+            }
+        });
 
         MariaDB_scrollpane.setViewportView(SQLServer_list);
 
         SQLServer_scrollpane.setViewportView(MariaDB_list);
+
+        MariaDB_scrollpane1.setViewportView(PrelimSQLServer);
+
+        RefreshTables_Button.setText("↻");
+        RefreshTables_Button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RefreshTables_ButtonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout tabTablasLayout = new javax.swing.GroupLayout(tabTablas);
         tabTablas.setLayout(tabTablasLayout);
         tabTablasLayout.setHorizontalGroup(
             tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabTablasLayout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(sinReplicarLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(replicandoLabel)
-                .addGap(117, 117, 117))
-            .addGroup(tabTablasLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(SQLServer_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(guardarTablas_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(toReplicando_button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cancelarTablas_button, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addComponent(MariaDB_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
-            .addGroup(tabTablasLayout.createSequentialGroup()
-                .addGap(296, 296, 296)
-                .addComponent(tablas_headerLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tabTablasLayout.createSequentialGroup()
+                        .addComponent(SQLServer_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tablas_headerLabel)
+                            .addGroup(tabTablasLayout.createSequentialGroup()
+                                .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(guardarTablas_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(RefreshTables_Button, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(toReplicando_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cancelarTablas_button, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
+                                .addGap(50, 50, 50)
+                                .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(MariaDB_scrollpane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(MariaDB_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(tabTablasLayout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(sinReplicarLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(replicandoLabel)
+                        .addGap(110, 110, 110))))
         );
         tabTablasLayout.setVerticalGroup(
             tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tabTablasLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(tablas_headerLabel)
-                .addGap(18, 18, 18)
+                .addGap(24, 24, 24)
                 .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sinReplicarLabel)
                     .addComponent(replicandoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(MariaDB_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SQLServer_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(tabTablasLayout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(toReplicando_button)
-                        .addGap(53, 53, 53)
-                        .addComponent(guardarTablas_button)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cancelarTablas_button)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MariaDB_scrollpane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(toReplicando_button))
+                        .addGap(8, 8, 8)
+                        .addGroup(tabTablasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(MariaDB_scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(tabTablasLayout.createSequentialGroup()
+                                .addComponent(RefreshTables_Button, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(guardarTablas_button)
+                                .addGap(18, 18, 18)
+                                .addComponent(cancelarTablas_button))))
+                    .addComponent(SQLServer_scrollpane))
+                .addGap(12, 12, 12))
         );
 
         mainTabbedPane.addTab("Tablas", tabTablas);
@@ -390,14 +433,17 @@ public class Main extends javax.swing.JFrame {
 
     private void probar_DestinoButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_probar_DestinoButtonMouseClicked
         Conexion_SQLServer prueba = new Conexion_SQLServer();
-        prueba.connect();
+        String passwordString = new String(passwordDestino_tf.getPassword());
+        prueba.connect(probar_DestinoLabel, SQLServerAWS, puertoDestino_tf.getText(), bddDestino_tf.getText(), usernameDestino_tf.getText(), passwordString);
         System.out.println("done");
     }//GEN-LAST:event_probar_DestinoButtonMouseClicked
 
     private void probar_OrigenButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_probar_OrigenButtonMouseClicked
         Conexion_MariaDB prueba = new Conexion_MariaDB();
-        prueba.Conexion_MariaDB();
+        String passwordString = new String(passwordOrigen_tf.getPassword());
+        prueba.Conexion_MariaDB(probar_OrigenLabel, MariaDBIP, puertoOrigen_tf.getText(), bddOrigen_tf.getText(), usernameOrigen_tf.getText(), passwordString);
         System.out.println("done maria");
+        ;
     }//GEN-LAST:event_probar_OrigenButtonMouseClicked
 
     private void bddDestino_tfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bddDestino_tfActionPerformed
@@ -406,13 +452,43 @@ public class Main extends javax.swing.JFrame {
 
     private void mainTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mainTabbedPaneStateChanged
 
+    }//GEN-LAST:event_mainTabbedPaneStateChanged
+
+    private void toReplicando_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toReplicando_buttonMouseClicked
+        List<String> selectedItems = MariaDB_list.getSelectedValuesList();
+        DefaultListModel<String> PrelimModel = new DefaultListModel<>();
+
+        for (String item : selectedItems) {
+            PrelimModel.addElement(item);
+            PrelimSQLServer.setModel(PrelimModel);
+        }
+    }//GEN-LAST:event_toReplicando_buttonMouseClicked
+
+    private void toReplicando_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toReplicando_buttonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toReplicando_buttonActionPerformed
+
+    private void guardarTablas_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarTablas_buttonMouseClicked
+        MariaDBToSQLServerExporter exportar = new MariaDBToSQLServerExporter();
+        exportar.exportMariaDBToSQLServer(MariaDB_list);
+    }//GEN-LAST:event_guardarTablas_buttonMouseClicked
+
+    private void cancelarTablas_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelarTablas_buttonMouseClicked
+        DefaultListModel<String> PrelimModel = new DefaultListModel<>();
+        PrelimSQLServer.setModel(PrelimModel);
+    }//GEN-LAST:event_cancelarTablas_buttonMouseClicked
+
+    private void RefreshTables_ButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RefreshTables_ButtonMouseClicked
         //Actualizar JList de TABLES de MariaDB
         DefaultListModel<String> MariaListModel = new DefaultListModel<>();
         try {
-            Connection connection = DriverManager.getConnection(mariaDBUrl, mariaDBUser, mariaDBPassword);
+            String urlMariaDB = "jdbc:mariadb://" + MariaDBIP + ":" + puertoOrigen_tf.getText() + "/" + bddOrigen_tf.getText();
+            String passwordString = new String(passwordOrigen_tf.getPassword());
+            Connection conexionMariaDB = DriverManager.getConnection(urlMariaDB, usernameOrigen_tf.getText(), passwordString);
+
             String sql = "SHOW TABLES FROM Proyecto_Teoria2";
             // Create a statement
-            Statement statement = connection.createStatement();
+            Statement statement = conexionMariaDB.createStatement();
             // Execute the query
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
@@ -421,14 +497,19 @@ public class Main extends javax.swing.JFrame {
             }
             MariaDB_list.setModel(MariaListModel);
             resultSet.close();
-            connection.close();
+            conexionMariaDB.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            DefaultListModel<String> PrelimModel = new DefaultListModel<>();
+            MariaDB_list.setModel(PrelimModel);
+            SQLServer_list.setModel(PrelimModel);
         }
 
         //Actualizar JList de TABLES de SQL Server
         DefaultListModel<String> ServerListModel = new DefaultListModel<>();
         try {
+            String passwordString = new String(passwordDestino_tf.getPassword());
+            String sqlServerUrl = "jdbc:sqlserver://" + SQLServerAWS + ":" + puertoDestino_tf.getText() + ";databaseName=" + bddDestino_tf.getText() + ";user=" + usernameDestino_tf.getText() + ";password=" + passwordString + ";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
             Connection connection = DriverManager.getConnection(sqlServerUrl);
             String sql = "SELECT TABLE_NAME\n"
                     + "FROM INFORMATION_SCHEMA.TABLES\n"
@@ -446,18 +527,10 @@ public class Main extends javax.swing.JFrame {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            DefaultListModel<String> PrelimModel = new DefaultListModel<>();
+            SQLServer_list.setModel(PrelimModel);
         }
-
-    }//GEN-LAST:event_mainTabbedPaneStateChanged
-
-    private void toReplicando_buttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toReplicando_buttonMouseClicked
-        MariaDBToSQLServerExporter exportar = new MariaDBToSQLServerExporter();
-        exportar.exportMariaDBToSQLServer(MariaDB_list);
-    }//GEN-LAST:event_toReplicando_buttonMouseClicked
-
-    private void toReplicando_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toReplicando_buttonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_toReplicando_buttonActionPerformed
+    }//GEN-LAST:event_RefreshTables_ButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -480,6 +553,9 @@ public class Main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> MariaDB_list;
     private javax.swing.JScrollPane MariaDB_scrollpane;
+    private javax.swing.JScrollPane MariaDB_scrollpane1;
+    private javax.swing.JList<String> PrelimSQLServer;
+    private javax.swing.JButton RefreshTables_Button;
     private javax.swing.JList<String> SQLServer_list;
     private javax.swing.JScrollPane SQLServer_scrollpane;
     private javax.swing.JTextField bddDestino_tf;
@@ -502,7 +578,9 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel passwordLabel1;
     private javax.swing.JPasswordField passwordOrigen_tf;
     private javax.swing.JButton probar_DestinoButton;
+    private javax.swing.JLabel probar_DestinoLabel;
     private javax.swing.JButton probar_OrigenButton;
+    private javax.swing.JLabel probar_OrigenLabel;
     private javax.swing.JTextField puertoDestino_tf;
     private javax.swing.JLabel puertoLabel;
     private javax.swing.JLabel puertoLabel1;

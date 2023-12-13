@@ -1,29 +1,30 @@
 
 package proyecto2tbd2;
+import java.awt.Color;
 import java.sql.*;
+import javax.swing.JLabel;
 
 public class Conexion_MariaDB {
     Connection conexion;
-    //Datos MariaDb
-    private String host = "127.0.0.1";
-    private String port = "3306";
-    private String dbName = "proyecto_teoria2";
-    private String userName = "root";
-    private String userPass = "root";
     
-    public void Conexion_MariaDB(){
+    public void Conexion_MariaDB(JLabel LabelConexion, String Server, String Puerto, String NombreBDD, String Username, String Password){
         try{
             //Conexion para MariaDB
-             
             Class.forName("org.mariadb.jdbc.Driver");
-            String url = "jdbc:mariadb://" + this.host +":" + this.port + "/" + this.dbName;
+            String url = "jdbc:mariadb://" + Server +":" + Puerto + "/" + NombreBDD;
             
-            conexion = DriverManager.getConnection(url, this.userName, this.userPass);
-            System.out.println("Host:" + host);
+            System.out.println(url);
+            
+            conexion = DriverManager.getConnection(url, Username, Password);
+            System.out.println("Host:" + Puerto);
             System.out.println("Conexion Exitosa");
+            LabelConexion.setText("Conexion Exitosa");
+            LabelConexion.setForeground(Color.green);
             
         }catch (ClassNotFoundException | SQLException e){
             e.printStackTrace();
+            LabelConexion.setText("Conexion Fallida");
+            LabelConexion.setForeground(Color.red);
         }
     }
     public void desconectar(){

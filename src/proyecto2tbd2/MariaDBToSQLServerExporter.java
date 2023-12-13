@@ -32,7 +32,7 @@ public class MariaDBToSQLServerExporter {
         this.sqlServerPassword = sqlServerPassword;
     }
 
-    public void exportMariaDBToSQLServer(JList MariaDB_list) {
+    public void exportMariaDBToSQLServer(JList PrelimSQLServer) {
         Connection MariaDBConnection = null;
         Connection SQLServerConnection = null;
 
@@ -44,7 +44,7 @@ public class MariaDBToSQLServerExporter {
             SQLServerConnection = DriverManager.getConnection(sqlServerUrl);
 
             // Export data from MariaDB to SQL Server
-            exportData(MariaDB_list, MariaDBConnection, SQLServerConnection);
+            exportData(PrelimSQLServer, MariaDBConnection, SQLServerConnection);
 
             System.out.println("Data exported successfully.");
 
@@ -146,11 +146,11 @@ public class MariaDBToSQLServerExporter {
         return triggerQuery.toString();
     }
 
-    private void exportData(JList MariaDB_list, Connection mariaDBConnection, Connection sqlServerConnection) throws SQLException {
+    private void exportData(JList PrelimSQLServer, Connection mariaDBConnection, Connection sqlServerConnection) throws SQLException {
         // Retrieve data from MariaDB
         Statement mariaDBStatement = mariaDBConnection.createStatement();
         Statement sqlServerStatement = sqlServerConnection.createStatement();
-        List<String> selectedItems = MariaDB_list.getSelectedValuesList();
+        List<String> selectedItems = PrelimSQLServer.getSelectedValuesList();
         String tableName;
 
         for (String item : selectedItems) {
