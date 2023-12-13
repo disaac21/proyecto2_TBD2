@@ -15,19 +15,19 @@ public class Conexion_SQLServer {
             // Create a connection URL
             String url = "jdbc:sqlserver://" + Server + ":" + Puerto + ";databaseName=" + NombreBDD + ";user="+Username +";password=" +Password+";encrypt=true;trustServerCertificate=true;loginTimeout=30;";
 
-            System.out.println(url);
+            //System.out.println(url);
             // Establish the connection
             connection = DriverManager.getConnection(url);
 
             if (connection != null) {
-                System.out.println("Connected to SQL Server database!");
+                //System.out.println("Connected to SQL Server database!");
                 LabelConexion.setText("Conexión Exitosa");
                 LabelConexion.setForeground(Color.green);
                 // Perform database operations here
                 // Example: execute queries, update data, etc.
             }
         } catch ( SQLException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             LabelConexion.setText("Conexión Fallida");
             LabelConexion.setForeground(Color.red);
         } finally {

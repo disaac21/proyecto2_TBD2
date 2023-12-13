@@ -13,16 +13,16 @@ public class Conexion_MariaDB {
             Class.forName("org.mariadb.jdbc.Driver");
             String url = "jdbc:mariadb://" + Server +":" + Puerto + "/" + NombreBDD;
             
-            System.out.println(url);
+            //System.out.println(url);
             
             conexion = DriverManager.getConnection(url, Username, Password);
-            System.out.println("Host:" + Puerto);
-            System.out.println("Conexion Exitosa");
+            //System.out.println("Host:" + Puerto);
+            //System.out.println("Conexion Exitosa");
             LabelConexion.setText("Conexion Exitosa");
             LabelConexion.setForeground(Color.green);
             
         }catch (ClassNotFoundException | SQLException e){
-            e.printStackTrace();
+            //e.printStackTrace();
             LabelConexion.setText("Conexion Fallida");
             LabelConexion.setForeground(Color.red);
         }
